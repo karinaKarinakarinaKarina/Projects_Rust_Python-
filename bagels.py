@@ -34,32 +34,34 @@ def clues(guess,secretNum):
 
 
 
+def main():
+    print('Bagels, a logic game.')
+    print('I am thinking of a'+str(num_digits)+'-digit number with no repeated digits. Try to guess it. Here are some clues:\n')
+    print(' Pico - One digit is correct but in the wrong position.\n')
+    print('Fermi - One digit is correct and in the right position\n')
+    print('Bagels - No digits is correct')
 
-print('Bagels, a logic game.')
-print('I am thinking of a'+str(num_digits)+'-digit number with no repeated digits. Try to guess it. Here are some clues:\n')
-print(' Pico - One digit is correct but in the wrong position.\n')
-print('Fermi - One digit is correct and in the right position\n')
-print('Bagels - No digits is correct')
-
-while True:
-    secretNum = secret_num() #то, что нужно угадать
-    print('I have thought up the number. Try to guess it :))')
-    print('You have only' + str(max_guesses) + 'guesses to understand what is the digit.')
-    num_guess=1
-    while num_guess <=max_guesses:
-        guess=''
-        while len(guess) != num_digits or not guess.isdecimal(): #проверка, что все символы строки являются десятичными
-            print('Guess #{}:'.format(num_guess))
-            guess = input('> ')
-        cclues = clues(guess,secretNum)
-        print(cclues)
-        num_guess +=1
-        if guess==secretNum:
+    while True:
+        secretNum = secret_num() #то, что нужно угадать
+        print('I have thought up the number. Try to guess it :))')
+        print('You have only' + str(max_guesses) + 'guesses to understand what is the digit.')
+        num_guess=1
+        while num_guess <=max_guesses:
+            guess=''
+            while len(guess) != num_digits or not guess.isdecimal(): #проверка, что все символы строки являются десятичными
+                print('Guess #{}:'.format(num_guess))
+                guess = input('> ')
+            cclues = clues(guess,secretNum)
+            print(cclues)
+            num_guess +=1
+            if guess==secretNum:
+                break
+            if num_guess > max_guesses:
+                print('Too much guesses,bro! The answer was {}.'.format(secretNum))
+        #хочет ли игрок сыграть еще раз?
+        print('Maybe you wanna play again?(print yes or no)')
+        if not input('> ').lower().startswith('y'):
             break
-        if num_guess > max_guesses:
-            print('Too much guesses,bro! The answer was {}.'.format(secretNum))
-    #хочет ли игрок сыграть еще раз?
-    print('Maybe you wanna play again?(print yes or no)')
-    if not input('> ').lower().startswith('y'):
-        break
-print('Thanks for playing!')
+    print('Thanks for playing!')
+if __name__ == '__main__':
+    main()
